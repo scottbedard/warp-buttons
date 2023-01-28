@@ -1,61 +1,15 @@
-/* This effect is mainly made possible by having a button that is overlapped by severap SVGS.
-The SVG are positioned absolutly over the button can will be animated to create the glimmer
-*/
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Button Implementation starts here */
-.home-hero-buttons {
-  @apply flex gap-6;
-  /* display: grid;
-  margin-top: 0px;
-  justify-items: start;
-  grid-auto-flow: column;
-  grid-auto-columns: auto;
-  grid-column-gap: 22.67px;
-  grid-row-gap: 16px;
-  grid-template-columns: auto;
-  grid-template-rows: auto; */
-}
-
-/* Generic button styles
-Notice that the height and the witdh
-of the button is the same of the height of the
-SVG
-*/
 button {
-  @apply flex h-12 items-center justify-center px-5 relative rounded text-center;
-  /* display: flex;
-  height: 48px;
-  margin-top: 0px;
-  padding-right: 20px;
-  padding-left: 20px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  line-height: 12.6px;
-  font-weight: 400;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer; */
+  @apply cursor-pointer flex font-bold gap-2 h-12 items-center justify-center px-5 relative rounded text-center text-sm tracking-wider w-full;
 }
-
-/* Icon in the Button - Play Icon and Apple */
-/* .button-image {
-  display: flex;
-  margin-right: 13px;
-}
-
-.button-text {
-  margin-top: 2px;
-  font-weight: 400;
-  text-decoration: none;
-} */
 
 /* Styles for blue button */
 .primary {
+  @apply text-black;
+
   background: linear-gradient(105.23deg, #01a4ff 33.35%, #01ffc2 115.77%);
   /* appearance: none;
   outline: none;
@@ -66,7 +20,7 @@ button {
 }
 
 /* Styles for Transparent Button */
-.button-transparent {
+.transparent {
   appearance: none;
   outline: none;
   position: relative;
@@ -81,7 +35,7 @@ button {
     border-color 200ms ease;
 }
 
-.button-transparent:hover {
+.transparent:hover {
   background-color: #fff;
   color: #000000;
 }
@@ -98,7 +52,7 @@ The SVGs will create the glimmer effect
 }
 
 .primary .lines > div,
-.button-transparent .lines > div {
+.transparent .lines > div {
   position: absolute;
   inset: 0;
 }
@@ -123,7 +77,7 @@ We also animate the stroke-dashoffset from 12 to 5. stroke-dashoffset pulls the 
   opacity: 0;
   transform: rotate(-1deg) translate3d(0, 0, 0);
 }
-.button-transparent .lines > div svg {
+.transparent .lines > div svg {
   display: block;
   position: absolute;
   inset: 0;
@@ -143,7 +97,7 @@ We also animate the stroke-dashoffset from 12 to 5. stroke-dashoffset pulls the 
 This is mainly done to give the Button glimmer some extra Oomph!
 */
 
-.button-transparent .lines > div svg:nth-child(1) {
+.transparent .lines > div svg:nth-child(1) {
   stroke: #f8fcff;
 }
 
@@ -151,26 +105,26 @@ This is mainly done to give the Button glimmer some extra Oomph!
   stroke: #01ffc2;
 }
 .primary .lines > div svg:nth-child(2),
-.button-transparent .lines > div svg:nth-child(2) {
+.transparent .lines > div svg:nth-child(2) {
   stroke-width: 6px;
   filter: blur(20px);
 }
 
 .primary .lines > div svg:nth-child(3),
-.button-transparent .lines > div svg:nth-child(3) {
+.transparent .lines > div svg:nth-child(3) {
   stroke-width: 5px;
   filter: blur(6px);
 }
 
 .primary .lines > div svg:nth-child(4),
-.button-transparent .lines > div svg:nth-child(4) {
+.transparent .lines > div svg:nth-child(4) {
   stroke-width: 10px;
   filter: blur(56px);
 }
 
 /* The glimmer starts on the top left corner and in the bottom right corner. We have a total of 8 SVGs per button we just rotate the latter four SVGs to duplicate the effect. */
 .primary .lines > div:last-child,
-.button-transparent .lines > div:last-child {
+.transparent .lines > div:last-child {
   transform: rotate(180deg);
 }
 
@@ -189,6 +143,6 @@ The animation needs to be linear as the timing function relates to each step.You
 }
 
 .primary:hover .lines svg,
-.button-transparent:hover .lines svg {
+.transparent:hover .lines svg {
   animation: stroke 0.3s linear;
 }
