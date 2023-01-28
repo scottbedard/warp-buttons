@@ -2,22 +2,14 @@
 The SVG are positioned absolutly over the button can will be animated to create the glimmer
 */
 
-html,
-body {
-  height: 100%;
-}
-
-body {
-  font-family: sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #180030;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Button Implementation starts here */
 .home-hero-buttons {
-  display: grid;
+  @apply flex gap-6;
+  /* display: grid;
   margin-top: 0px;
   justify-items: start;
   grid-auto-flow: column;
@@ -25,7 +17,7 @@ body {
   grid-column-gap: 22.67px;
   grid-row-gap: 16px;
   grid-template-columns: auto;
-  grid-template-rows: auto;
+  grid-template-rows: auto; */
 }
 
 /* Generic button styles
@@ -33,8 +25,9 @@ Notice that the height and the witdh
 of the button is the same of the height of the
 SVG
 */
-.hero-button {
-  display: flex;
+button {
+  @apply flex h-12 items-center px-5 rounded;
+  /* display: flex;
   height: 48px;
   margin-top: 0px;
   padding-right: 20px;
@@ -46,11 +39,11 @@ SVG
   font-weight: 400;
   text-align: center;
   text-decoration: none;
-  cursor: pointer;
+  cursor: pointer; */
 }
 
 /* Icon in the Button - Play Icon and Apple */
-.button-image {
+/* .button-image {
   display: flex;
   margin-right: 13px;
 }
@@ -59,7 +52,7 @@ SVG
   margin-top: 2px;
   font-weight: 400;
   text-decoration: none;
-}
+} */
 
 /* Styles for blue button */
 .button-gradient {
