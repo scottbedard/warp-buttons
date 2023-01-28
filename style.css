@@ -1,97 +1,200 @@
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+/* This effect is mainly made possible by having a button that is overlapped by severap SVGS.
+The SVG are positioned absolutly over the button can will be animated to create the glimmer
+*/
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+html,
+body {
+  height: 100%;
 }
 
 body {
-  margin: 0;
+  font-family: sans-serif;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: #180030;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Button Implementation starts here */
+.home-hero-buttons {
+  display: grid;
+  margin-top: 0px;
+  justify-items: start;
+  grid-auto-flow: column;
+  grid-auto-columns: auto;
+  grid-column-gap: 22.67px;
+  grid-row-gap: 16px;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Generic button styles
+Notice that the height and the witdh
+of the button is the same of the height of the
+SVG
+*/
+.hero-button {
+  display: flex;
+  height: 48px;
+  margin-top: 0px;
+  padding-right: 20px;
+  padding-left: 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  line-height: 12.6px;
+  font-weight: 400;
   text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  text-decoration: none;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Icon in the Button - Play Icon and Apple */
+.button-image {
+  display: flex;
+  margin-right: 13px;
+}
+
+.button-text {
+  margin-top: 2px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+/* Styles for blue button */
+.button-gradient {
+  appearance: none;
+  outline: none;
+  border: none;
+  background: linear-gradient(105.23deg, #01a4ff 33.35%, #01ffc2 115.77%);
+  position: relative;
+  color: #000000;
+}
+
+/* Styles for Transparent Button */
+.button-transparent {
+  appearance: none;
+  outline: none;
+  position: relative;
+  border: 1px solid hsla(0, 0%, 100%, 0.6);
+  transition: color 200ms ease, background-color 200ms ease,
+    border-color 200ms ease;
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0), 0 4px 16px rgba(0, 0, 0),
+    0 4px 24px rgba(0, 0, 0);
+  background-color: transparent;
+  transition: color 200ms ease, background-color 200ms ease,
+    border-color 200ms ease;
+}
+
+.button-transparent:hover {
+  background-color: #fff;
+  color: #000000;
+}
+
+/* The SVGs are overlapping with the button
+The SVGs will create the glimmer effect
+*/
+.lines {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: hard-light;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.button-gradient .lines > div,
+.button-transparent .lines > div {
+  position: absolute;
+  inset: 0;
+}
+
+/* The all the SVGs are slightly tilted */
+/*  Notice that the fill property is set to none so you do not see the "inside" of the SVG - You only want to see the glimmer. 
+Also whe start out with opacity 0 and increase the opacity at :hover
+We also animate the stroke-dashoffset from 12 to 5. stroke-dashoffset pulls the dash into one direction
+*/
+.button-gradient .lines > div svg {
+  display: block;
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  fill: none;
+  stroke-width: 2;
+  stroke: #01a4ff;
+  width: 100%;
+  height: 100%;
+  stroke-dasharray: 12 12;
+  stroke-dashoffset: 12;
+  opacity: 0;
+  transform: rotate(-1deg) translate3d(0, 0, 0);
+}
+.button-transparent .lines > div svg {
+  display: block;
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  fill: none;
+  stroke-width: 2;
+  stroke: #c9e9ff;
+  width: 100%;
+  height: 100%;
+  stroke-dasharray: 12 12;
+  stroke-dashoffset: 12;
+  opacity: 0;
+  transform: rotate(-1deg) translate3d(0, 0, 0);
+}
+
+/* Layered colors of each rect in the SVG 
+This is mainly done to give the Button glimmer some extra Oomph!
+*/
+
+.button-transparent .lines > div svg:nth-child(1) {
+  stroke: #f8fcff;
+}
+
+.button-gradient .lines > div svg:nth-child(1) {
+  stroke: #01ffc2;
+}
+.button-gradient .lines > div svg:nth-child(2),
+.button-transparent .lines > div svg:nth-child(2) {
+  stroke-width: 6px;
+  filter: blur(20px);
+}
+
+.button-gradient .lines > div svg:nth-child(3),
+.button-transparent .lines > div svg:nth-child(3) {
+  stroke-width: 5px;
+  filter: blur(6px);
+}
+
+.button-gradient .lines > div svg:nth-child(4),
+.button-transparent .lines > div svg:nth-child(4) {
+  stroke-width: 10px;
+  filter: blur(56px);
+}
+
+/* The glimmer starts on the top left corner and in the bottom right corner. We have a total of 8 SVGs per button we just rotate the latter four SVGs to duplicate the effect. */
+.button-gradient .lines > div:last-child,
+.button-transparent .lines > div:last-child {
+  transform: rotate(180deg);
+}
+
+/* Animation of the glimmer - speeds up at the end.
+The animation needs to be linear as the timing function relates to each step.You can have it as linear and play with the percentages in the keyframes
+*/
+@keyframes stroke {
+  30%,
+  55% {
+    opacity: 1;
   }
-  a:hover {
-    color: #747bff;
+  100% {
+    stroke-dashoffset: 5;
+    opacity: 0;
   }
-  button {
-    background-color: #f9f9f9;
-  }
+}
+
+.button-gradient:hover .lines svg,
+.button-transparent:hover .lines svg {
+  animation: stroke 0.3s linear;
 }
