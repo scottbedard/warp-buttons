@@ -16,15 +16,18 @@
  * Base button styles
  */
 button {
-  @apply appearance-none cursor-pointer flex font-bold gap-2 h-12 items-center justify-center outline-none px-5 relative rounded text-center text-sm tracking-wider whitespace-nowrap w-full;
+  --fill-duration: 300ms;
+  --stroke-duration: 200ms;
+
+  @apply appearance-none cursor-pointer flex font-bold gap-2 h-12 items-center justify-center outline-none px-5 relative rounded drop-shadow-md text-center text-sm tracking-wider whitespace-nowrap w-full;
 }
 
 button:hover .lines svg {
-  animation: stroke 200ms linear;
+  animation: stroke var(--stroke-duration) linear;
 }
 
 button .lines {
-  @apply absolute inset-0 mix-blend-hard-light pointer-events-none z-[1];
+  @apply absolute inset-0 mix-blend-hard-light pointer-events-none z-10;
 }
 
 button .lines > div {
@@ -44,15 +47,9 @@ button.primary {
  * Transparent
  */
 .transparent {
-  border: 1px solid hsla(0, 0%, 100%, 0.6);
-  transition: color 200ms ease, background-color 200ms ease,
-    border-color 200ms ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0), 0 4px 16px rgba(0, 0, 0),
-    0 4px 24px rgba(0, 0, 0);
-  transition: color 200ms ease, background-color 200ms ease,
-    border-color 200ms ease;
+  @apply bg-transparent border-2 border-white/80 text-white transition-colors hover:bg-white hover:text-black;
 
-  @apply bg-transparent duration-200 text-white transition-all hover:bg-white hover:text-black;
+  transition-duration: var(--fill-duration);
 }
 
 /* The SVGs are overlapping with the button
@@ -65,14 +62,11 @@ The SVGs will create the glimmer effect
 Also whe start out with opacity 0 and increase the opacity at :hover
 We also animate the stroke-dashoffset from 12 to 5. stroke-dashoffset pulls the dash into one direction
 */
+button .lines > div > svg {
+  @apply absolute block fill-none h-full inset-0 opacity-0 overflow-visible w-full;
+}
+
 .primary .lines > div svg {
-  display: block;
-  fill: none;
-  height: 100%;
-  inset: 0;
-  opacity: 0;
-  overflow: visible;
-  position: absolute;
   stroke-dasharray: 12 12;
   stroke-dashoffset: 12;
   stroke-width: 2;
@@ -82,13 +76,6 @@ We also animate the stroke-dashoffset from 12 to 5. stroke-dashoffset pulls the 
 }
 
 .transparent .lines > div svg {
-  display: block;
-  fill: none;
-  height: 100%;
-  inset: 0;
-  opacity: 0;
-  overflow: visible;
-  position: absolute;
   stroke-dasharray: 12 12;
   stroke-dashoffset: 12;
   stroke-width: 2;
@@ -108,14 +95,13 @@ This is mainly done to give the Button glimmer some extra Oomph!
 .primary .lines > div svg:nth-child(1) {
   stroke: #01ffc2;
 }
-.primary .lines > div svg:nth-child(2),
-.transparent .lines > div svg:nth-child(2) {
+
+button .lines > div svg:nth-child(2) {
   stroke-width: 6px;
   filter: blur(20px);
 }
 
-.primary .lines > div svg:nth-child(3),
-.transparent .lines > div svg:nth-child(3) {
+button .lines > div svg:nth-child(3) {
   stroke-width: 5px;
   filter: blur(6px);
 }
