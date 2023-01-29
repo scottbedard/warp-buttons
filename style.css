@@ -3,41 +3,41 @@
 @tailwind utilities;
 
 button {
-  @apply cursor-pointer flex font-bold gap-2 h-12 items-center justify-center px-5 relative rounded text-center text-sm tracking-wider w-full;
+  @apply appearance-none cursor-pointer flex font-bold gap-2 h-12 items-center justify-center outline-none px-5 relative rounded text-center text-sm tracking-wider w-full;
+}
+
+button:hover .lines svg {
+  animation: stroke 500ms linear;
+}
+
+@keyframes stroke {
+  30%, 55% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    stroke-dashoffset: 5;
+  }
 }
 
 /* Styles for blue button */
 .primary {
   @apply text-black;
 
-  background: linear-gradient(105.23deg, #01a4ff 33.35%, #01ffc2 115.77%);
-  /* appearance: none;
-  outline: none;
-  border: none;
-  background: linear-gradient(105.23deg, #01a4ff 33.35%, #01ffc2 115.77%);
-  position: relative;
-  color: #000000; */
+  background: linear-gradient(100deg, #01a4ff 35%, #01ffc2 115%);
 }
 
 /* Styles for Transparent Button */
 .transparent {
-  appearance: none;
-  outline: none;
-  position: relative;
   border: 1px solid hsla(0, 0%, 100%, 0.6);
   transition: color 200ms ease, background-color 200ms ease,
     border-color 200ms ease;
-  color: #fff;
   box-shadow: 0 1px 2px rgba(0, 0, 0), 0 4px 16px rgba(0, 0, 0),
     0 4px 24px rgba(0, 0, 0);
-  background-color: transparent;
   transition: color 200ms ease, background-color 200ms ease,
     border-color 200ms ease;
-}
 
-.transparent:hover {
-  background-color: #fff;
-  color: #000000;
+  @apply bg-transparent text-white transition-colors;
 }
 
 /* The SVGs are overlapping with the button
@@ -75,7 +75,7 @@ We also animate the stroke-dashoffset from 12 to 5. stroke-dashoffset pulls the 
   stroke-dasharray: 12 12;
   stroke-dashoffset: 12;
   opacity: 0;
-  transform: rotate(-1deg) translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 .transparent .lines > div svg {
   display: block;
@@ -90,7 +90,7 @@ We also animate the stroke-dashoffset from 12 to 5. stroke-dashoffset pulls the 
   stroke-dasharray: 12 12;
   stroke-dashoffset: 12;
   opacity: 0;
-  transform: rotate(-1deg) translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* Layered colors of each rect in the SVG 
@@ -142,7 +142,3 @@ The animation needs to be linear as the timing function relates to each step.You
   }
 }
 
-.primary:hover .lines svg,
-.transparent:hover .lines svg {
-  animation: stroke 0.3s linear;
-}
