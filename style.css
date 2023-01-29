@@ -31,10 +31,6 @@ main {
   justify-content: center;
 }
 
-.btn {
-  width: 100%;
-}
-
 @media (min-width: 600px) {
   main {
     flex-wrap: nowrap;
@@ -61,7 +57,9 @@ main {
   padding: 0 1.5rem;
   position: relative;
   text-align: center;
+  text-decoration: none;
   white-space: nowrap;
+  width: 100%;
 }
 
 .btn .lines {
