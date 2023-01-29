@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-button {
-  @apply appearance-none cursor-pointer flex font-bold gap-2 h-12 items-center justify-center outline-none px-5 relative rounded text-center text-sm tracking-wider w-full;
-}
-
-button:hover .lines svg {
-  animation: stroke 500ms linear;
-}
-
 @keyframes stroke {
   30%, 55% {
     opacity: 1;
@@ -20,14 +12,37 @@ button:hover .lines svg {
   }
 }
 
-/* Styles for blue button */
-.primary {
+/**
+ * Base button styles
+ */
+button {
+  @apply appearance-none cursor-pointer flex font-bold gap-2 h-12 items-center justify-center outline-none px-5 relative rounded text-center text-sm tracking-wider whitespace-nowrap w-full;
+}
+
+button:hover .lines svg {
+  animation: stroke 200ms linear;
+}
+
+button .lines {
+  @apply absolute inset-0 mix-blend-hard-light pointer-events-none z-[1];
+}
+
+button .lines > div {
+  @apply absolute inset-0;
+}
+
+/**
+ * Primary
+ */
+button.primary {
   @apply text-black;
 
   background: linear-gradient(100deg, #01a4ff 35%, #01ffc2 115%);
 }
 
-/* Styles for Transparent Button */
+/**
+ * Transparent
+ */
 .transparent {
   border: 1px solid hsla(0, 0%, 100%, 0.6);
   transition: color 200ms ease, background-color 200ms ease,
@@ -37,25 +52,13 @@ button:hover .lines svg {
   transition: color 200ms ease, background-color 200ms ease,
     border-color 200ms ease;
 
-  @apply bg-transparent text-white transition-colors;
+  @apply bg-transparent duration-200 text-white transition-all hover:bg-white hover:text-black;
 }
 
 /* The SVGs are overlapping with the button
 The SVGs will create the glimmer effect
 */
-.lines {
-  position: absolute;
-  inset: 0;
-  mix-blend-mode: hard-light;
-  pointer-events: none;
-  z-index: 1;
-}
 
-.primary .lines > div,
-.transparent .lines > div {
-  position: absolute;
-  inset: 0;
-}
 
 /* The all the SVGs are slightly tilted */
 /*  Notice that the fill property is set to none so you do not see the "inside" of the SVG - You only want to see the glimmer. 
@@ -64,33 +67,34 @@ We also animate the stroke-dashoffset from 12 to 5. stroke-dashoffset pulls the 
 */
 .primary .lines > div svg {
   display: block;
-  position: absolute;
-  inset: 0;
-  overflow: visible;
   fill: none;
+  height: 100%;
+  inset: 0;
+  opacity: 0;
+  overflow: visible;
+  position: absolute;
+  stroke-dasharray: 12 12;
+  stroke-dashoffset: 12;
   stroke-width: 2;
   stroke: #01a4ff;
-  width: 100%;
-  height: 100%;
-  stroke-dasharray: 12 12;
-  stroke-dashoffset: 12;
-  opacity: 0;
   transform: translate3d(0, 0, 0);
+  width: 100%;
 }
+
 .transparent .lines > div svg {
   display: block;
-  position: absolute;
-  inset: 0;
-  overflow: visible;
   fill: none;
-  stroke-width: 2;
-  stroke: #c9e9ff;
-  width: 100%;
   height: 100%;
+  inset: 0;
+  opacity: 0;
+  overflow: visible;
+  position: absolute;
   stroke-dasharray: 12 12;
   stroke-dashoffset: 12;
-  opacity: 0;
+  stroke-width: 2;
+  stroke: #c9e9ff;
   transform: translate3d(0, 0, 0);
+  width: 100%;
 }
 
 /* Layered colors of each rect in the SVG 
@@ -127,18 +131,3 @@ This is mainly done to give the Button glimmer some extra Oomph!
 .transparent .lines > div:last-child {
   transform: rotate(180deg);
 }
-
-/* Animation of the glimmer - speeds up at the end.
-The animation needs to be linear as the timing function relates to each step.You can have it as linear and play with the percentages in the keyframes
-*/
-@keyframes stroke {
-  30%,
-  55% {
-    opacity: 1;
-  }
-  100% {
-    stroke-dashoffset: 5;
-    opacity: 0;
-  }
-}
-
