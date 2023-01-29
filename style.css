@@ -15,8 +15,6 @@
  * Base styles
  */
 .btn {
-  --fill-duration: 300ms;
-  --stroke-duration: 200ms;
   align-items: center;
   appearance: none;
   border-radius: 0.25rem;
@@ -38,7 +36,7 @@
 }
 
 .btn:hover .lines svg {
-  animation: stroke var(--stroke-duration) linear;
+  animation: stroke 200ms linear;
 }
 
 .btn .lines {
@@ -110,9 +108,9 @@
   background: transparent;
   border: 2px solid #fff;
   color: #fff;
-  transition-duration: var(--fill-duration);
-  transition-property: color, background-color, border-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+  transition-property: color, background-color;
+  transition-timing-function: ease-out;
 }
 
 .btn-transparent:hover {
