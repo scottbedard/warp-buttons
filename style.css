@@ -35,10 +35,6 @@
   width: 100%;
 }
 
-.btn:hover .lines svg {
-  animation: stroke 200ms linear;
-}
-
 .btn .lines {
   inset: 0;
   mix-blend-mode: hard-light;
@@ -85,6 +81,10 @@
   stroke-width: 10px;
 }
 
+.btn:hover .lines svg {
+  animation: stroke 250ms linear;
+}
+
 /**
  * Primary
  */
@@ -108,14 +108,9 @@
   background: transparent;
   border: 2px solid #fff;
   color: #fff;
-  transition-duration: 200ms;
+  transition-duration: 300ms;
   transition-property: color, background-color;
   transition-timing-function: ease-out;
-}
-
-.btn-transparent:hover {
-  background: #fff;
-  color: #000;
 }
 
 .btn-transparent .lines svg {
@@ -124,4 +119,9 @@
 
 .btn-transparent .lines svg:nth-child(1) {
   stroke: #f8fcff;
+}
+
+.btn-transparent:hover {
+  background: #fff;
+  color: #000;
 }
